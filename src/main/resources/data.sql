@@ -1,1 +1,1 @@
-insert into ACCOUNT (id, user_id, account_number, address) values (1, 1, 'abc123', '23 Crestwood Dr., Cambridge, ON, Canada');
+insert into ACCOUNT (id, user_id, first_name, last_name, address) values (1, 1, 'Chris', 'Peckover', '23 Crestwood Dr., Cambridge, ON, Canada');

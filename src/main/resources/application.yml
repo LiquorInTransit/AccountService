@@ -10,7 +10,7 @@ spring:
     active: test
   datasource:
     name: test
-    url: jdbc:hsqldb:mem:test://localhost/test
+    url: jdbc:hsqldb:mem:test1://localhost/test1
     username:
     password: 
   jpa:
@@ -19,19 +19,25 @@ spring:
         dialect: org.hibernate.dialect.HSQLDialect
     hibernate:
       ddl-auto: none
-
+      
+security:
+  oauth2:
+    resource:
+      filter-order: 3
+      userInfoUri: http://localhost:5000/uaa/user
+    client:
+      client-id: LITSystem
+      client-secret: LITSystem
+ #     accessTokenUri: http://localhost:5000/uaa/user
+ #     grant-type: client_credentials
+ #     scope: system
 
 ---
   
-eureka:
-  instance:
-    hostname: localhost
-    port: 8761
-  client:
-    serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka
+
    
 spring:
+  profiles: prod
  # data:
   #  rest:
    #   basePath: /v1
@@ -59,3 +65,10 @@ security:
 #      accessTokenUri: http://localhost:8080/uaa/oauth/token
 #      grant-type: client_credentials
 #      scope: system
+eureka:
+  instance:
+    hostname: localhost
+    port: 8761
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka
