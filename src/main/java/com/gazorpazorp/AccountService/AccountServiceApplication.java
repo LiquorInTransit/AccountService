@@ -41,20 +41,20 @@ public class AccountServiceApplication {
 		SpringApplication.run(AccountServiceApplication.class, args);
 	}
 	
-	@LoadBalanced
-    @Bean
-    public OAuth2RestTemplate loadBalancedOauth2RestTemplate(
-            OAuth2ProtectedResourceDetails resource, OAuth2ClientContext context) {
-        return new OAuth2RestTemplate(resource, context);
-    }
-    
-    //This essentially allows @PreAuthorize("#oauth2.hasScope('system')") to work
-    @Autowired
-	private ResourceServerProperties sso;
-	@Bean
-	public ResourceServerTokenServices myUserInfoTokenServices() {
-		return new CustomUserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());
-	}
+//	@LoadBalanced
+//    @Bean
+//    public OAuth2RestTemplate loadBalancedOauth2RestTemplate(
+//            OAuth2ProtectedResourceDetails resource, OAuth2ClientContext context) {
+//        return new OAuth2RestTemplate(resource, context);
+//    }
+//    
+//    //This essentially allows @PreAuthorize("#oauth2.hasScope('system')") to work
+//    @Autowired
+//	private ResourceServerProperties sso;
+//	@Bean
+//	public ResourceServerTokenServices myUserInfoTokenServices() {
+//		return new CustomUserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());
+//	}
 	
 	
 	@EnableResourceServer

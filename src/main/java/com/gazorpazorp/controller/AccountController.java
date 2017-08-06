@@ -8,9 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
-import org.springframework.security.oauth2.provider.OAuth2Request;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,8 +22,7 @@ public class AccountController {
 	private AccountService accountService;
 	
 	@GetMapping("/accounts")
-	public ResponseEntity getCurrentAccount(/*@RequestHeader("Authorization") String token*/Authentication deets) throws Exception {
-		OAuth2Request req = ((OAuth2Authentication) deets).getOAuth2Request();
+	public ResponseEntity getCurrentAccount() throws Exception {
 		return Optional.ofNullable(accountService.getCurrentAccount())
 				.map(a -> new ResponseEntity<List<Account>>(a, HttpStatus.OK))
 				.orElseThrow(() -> new Exception("Accounts for user do not exist"));
