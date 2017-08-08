@@ -21,8 +21,9 @@ public class AccountController {
 	@Autowired
 	private AccountService accountService;
 	
+	@PreAuthorize("#oauth2.hasScope('read')")
 	@GetMapping("/accounts")
-	public ResponseEntity getCurrentAccount() throws Exception {
+	public ResponseEntity<List<Account>> getCurrentAccount() throws Exception {
 		return Optional.ofNullable(accountService.getCurrentAccount())
 				.map(a -> new ResponseEntity<List<Account>>(a, HttpStatus.OK))
 				.orElseThrow(() -> new Exception("Accounts for user do not exist"));
@@ -31,8 +32,18 @@ public class AccountController {
 	@PreAuthorize("#oauth2.hasScope('system')")
 	@GetMapping("/accounts/{id}")
 	public ResponseEntity getAccountById(@PathVariable Long id) throws Exception{
+		System.out.println("getAccountById: " + id);
 		return Optional.ofNullable(accountService.getAccountById(id))
 				.map(a -> new ResponseEntity<Account>(a, HttpStatus.OK))
+				.orElseThrow(() -> new Exception("Account does not exist"));
+	}
+	
+	@PreAuthorize("#oauth2.hasScope('system')")
+	@GetMapping("/accounts/by_user_id/{id}")
+	public ResponseEntity<List<Account>> getAccountsByUserId(@PathVariable Long id) throws Exception{
+		System.out.println("getAccountsByUserId: " + id);
+		return Optional.ofNullable(accountService.getAccountsByUserId(id))
+				.map(a -> new ResponseEntity<List<Account>>(a, HttpStatus.OK))
 				.orElseThrow(() -> new Exception("Account does not exist"));
 	}
 	

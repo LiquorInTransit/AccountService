@@ -25,6 +25,7 @@ public class AccountService {
 //		User user = oAuth2RestTemplate.getForObject("http://localhost:5000/uaa/me", User.class);
 //		System.out.println(user);
 //		if (user != null)
+		System.out.println("Received request for id " + SecurityContextHolder.getContext().getAuthentication().getName());
 			account = accountRepository.findAccountsByUserId(Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName()));
 		
 		return account;
@@ -32,6 +33,10 @@ public class AccountService {
 	
 	public Account getAccountById(Long id) {
 		return accountRepository.findAccountById(id);
+	}
+	
+	public List<Account> getAccountsByUserId(Long id) {
+		return accountRepository.findAccountsByUserId(id);
 	}
 	
 	public static class User {

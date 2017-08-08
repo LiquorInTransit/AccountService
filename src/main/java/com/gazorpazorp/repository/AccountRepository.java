@@ -10,6 +10,7 @@ import com.gazorpazorp.model.Account;
 
 @Repository
 public interface AccountRepository extends PagingAndSortingRepository<Account, Long>{
+	
 	List<Account> findAccountsByUserId(@Param("userId") Long userId);
 	
 	Account findAccountById(@Param("id") Long id);
