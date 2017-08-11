@@ -13,27 +13,17 @@ import org.hibernate.annotations.GenericGenerator;
 public class Account {
 	
 	private Long id;
-//	private String id;
 	private Long userId;
-//	private String userId;
 	private String firstName;
 	private String lastName;
 	private String address;
 
 	public Account() {}
 	
-	
-//	@Id
-//	@Column(columnDefinition = "BINARY(16)")
-//	@GeneratedValue(generator = "uuid2")
-//	@GenericGenerator(name = "uuid2", strategy = "uuid2")
-//	public String getId() {
-//		return id;
-//	}
-//	public void setId(String id) {
-//		this.id = id;
-//	}
+
 	@Id
+	@GenericGenerator(name = "incrementGenerator", strategy = "org.hibernate.id.IncrementGenerator")
+	@GeneratedValue(generator="incrementGenerator")
 	@Column(name = "id", length = 20)
 	public Long getId() {
 		return this.id;
@@ -41,14 +31,6 @@ public class Account {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-//	@Column(columnDefinition = "BINARY(16)")
-//	public String getUserId() {
-//		return id;
-//	}
-//	public void setUserId(String userId) {
-//		this.userId = userId;
-//	}
 	
 	@Column(name = "user_id", length = 20)
 	public Long getUserId() {
