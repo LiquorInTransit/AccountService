@@ -1,11 +1,10 @@
 package com.gazorpazorp.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Service;
 
@@ -21,17 +20,17 @@ public class AccountService {
 ////	@LoadBalanced
 //	OAuth2RestTemplate oAuth2RestTemplate;
 	
-	public List<Account> getCurrentAccount () {
-		List<Account> account = null;
+	public Optional<Account> getCurrentAccount () {
+		List<Account> accounts = null;
 //		User user = oAuth2RestTemplate.getForObject("http://localhost:5000/uaa/me", User.class);
 //		System.out.println(user);
 //		if (user != null)
 		System.out.println("Received request for id " + SecurityContextHolder.getContext().getAuthentication().getName());
-//		String clientId = ((OAuth2Authentication)SecurityContextHolder.getContext().getAuthentication()).getOAuth2Request().getClientId();
+		String clientId = ((OAuth2Authentication)SecurityContextHolder.getContext().getAuthentication()).getOAuth2Request().getClientId();
 //		System.out.println(clientId);
-			account = accountRepository.findAccountsByUserId(Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName()));
+		accounts = accountRepository.findAccountsByUserId(Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName()));
 		
-		return account;
+		return accounts.stream().filter(account -> ("LITMobileCustomerClient".equals(clientId))?(!account.isDriver()):account.isDriver()).findFirst();
 	}
 	
 	public Account getAccountById(Long id) {

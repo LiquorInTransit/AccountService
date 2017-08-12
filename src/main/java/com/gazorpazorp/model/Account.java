@@ -17,6 +17,8 @@ public class Account {
 	private String firstName;
 	private String lastName;
 	private String address;
+	
+	private boolean driver;
 
 	public Account() {}
 	
@@ -62,6 +64,14 @@ public class Account {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	@Column(name = "is_driver")
+	public boolean isDriver() {
+		return driver;
+	}
+	public void setDriver(boolean driver) {
+		this.driver = driver;
 	}
 	
 	

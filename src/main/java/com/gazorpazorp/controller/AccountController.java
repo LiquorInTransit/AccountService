@@ -23,9 +23,9 @@ public class AccountController {
 	
 	@PreAuthorize("#oauth2.hasScope('read')")
 	@GetMapping("/accounts")
-	public ResponseEntity<List<Account>> getCurrentAccount() throws Exception {
-		return Optional.ofNullable(accountService.getCurrentAccount())
-				.map(a -> new ResponseEntity<List<Account>>(a, HttpStatus.OK))
+	public ResponseEntity<Account> getCurrentAccount() throws Exception {
+		return accountService.getCurrentAccount()
+				.map(a -> new ResponseEntity<Account>(a, HttpStatus.OK))
 				.orElseThrow(() -> new Exception("Accounts for user do not exist"));
 	}
 	

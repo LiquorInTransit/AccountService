@@ -31,7 +31,7 @@ import org.springframework.util.FileCopyUtils;
 @EntityScan(basePackages="com.gazorpazorp")
 //@EnableEurekaClient
 //@EnableFeignClients
-
+@EnableResourceServer
 @EnableOAuth2Client
 //@EnableHystrix
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -57,25 +57,25 @@ public class AccountServiceApplication {
 //	}
 	
 	
-	@EnableResourceServer
-	public static class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
-		@Override
-		public void configure(HttpSecurity http) throws Exception {
-			http
-				.csrf().disable()
-				.authorizeRequests()
-				.antMatchers("/**").authenticated();
-//				.antMatchers(HttpMethod.GET, "/foo").hasAuthority("FOO_READ")
-		}		
-		@Override
-		public void configure (ResourceServerSecurityConfigurer resources) throws Exception {
-//			resources.tokenServices(tokenServices());
-			resources.tokenStore(tokenStore);
-		}
-		
-		@Autowired
-		TokenStore tokenStore;
-		
+//	@EnableResourceServer
+//	public static class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
+//		@Override
+//		public void configure(HttpSecurity http) throws Exception {
+//			http
+//				.csrf().disable()
+//				.authorizeRequests()
+//				.antMatchers("/**").authenticated();
+////				.antMatchers(HttpMethod.GET, "/foo").hasAuthority("FOO_READ")
+//		}		
+//		@Override
+//		public void configure (ResourceServerSecurityConfigurer resources) throws Exception {
+////			resources.tokenServices(tokenServices());
+//			resources.tokenStore(tokenStore);
+//		}
+//		
+//		@Autowired
+//		TokenStore tokenStore;
+//		
 //		@Bean
 //		@Primary
 //		public DefaultTokenServices tokenServices() {
@@ -91,23 +91,23 @@ public class AccountServiceApplication {
 //			return new JwtTokenStore(accessTokenConverter);
 //		}
 //		
-		@Bean
-		public JwtAccessTokenConverter accessTokenConverter() {
-			JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-			Resource resource = new ClassPathResource("public.cert");
-			String publicKey = null;
-			try {
-				publicKey = new String(FileCopyUtils.copyToByteArray(resource.getInputStream()));
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
-			System.out.println(publicKey);
-			converter.setVerifierKey(publicKey);
-			
-			return converter;
-		}
-		
-	}
+//		@Bean
+//		public JwtAccessTokenConverter accessTokenConverter() {
+//			JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+//			Resource resource = new ClassPathResource("public.cert");
+//			String publicKey = null;
+//			try {
+//				publicKey = new String(FileCopyUtils.copyToByteArray(resource.getInputStream()));
+//			} catch (IOException e) {
+//				throw new RuntimeException(e);
+//			}
+//			System.out.println(publicKey);
+//			converter.setVerifierKey(publicKey);
+//			
+//			return converter;
+//		}
+//		
+//	}
 	
 	
 //	@Configuration
