@@ -7,8 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
+import com.gazorpazorp.client.UserClient;
 import com.gazorpazorp.model.Account;
+import com.gazorpazorp.model.User;
+import com.gazorpazorp.model.dto.AccountCreationDto;
 import com.gazorpazorp.repository.AccountRepository;
 
 @Service
@@ -16,6 +20,8 @@ public class AccountService {
 
 	@Autowired
 	private AccountRepository accountRepository;
+	@Autowired
+	private UserClient userClient;
 //	@Autowired
 ////	@LoadBalanced
 //	OAuth2RestTemplate oAuth2RestTemplate;
@@ -41,18 +47,26 @@ public class AccountService {
 		return accountRepository.findAccountsByUserId(id);
 	}
 	
-	public static class User {
-		private Long id;
-		
-		public Long getId() {
-			return id;
-		}
-
-		@Override
-		public String toString() {
-			return "User [id=" + id + "]";
-		}
-		
-	}
 	
+	public Account createAccount(AccountCreationDto dto) {
+		//Make sure an account with this name doesn't already exist
+		Account existing = accountRepository.findByFirstName(dto.getFirstName());//TODO: Change this check to EMAIL
+		Assert.isNull(existing, "Account with that email already exists.");
+		
+		User user = new User(dto.getUsername(), dto.getPassword());
+		System.out.println(user);
+		user = userClient.createUser(user);
+		
+		Assert.notNull(user, "An unexpected error occurred.");
+		
+		Account account = new Account();
+		account.setAddress(dto.getAddress());
+		account.setFirstName(dto.getFirstName());
+		account.setLastName(dto.getLastName());
+		account.setUserId(user.getId());
+		
+		account = accountRepository.save(account);
+		
+		return account;
+	}
 }

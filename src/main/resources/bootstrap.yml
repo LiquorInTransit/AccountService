@@ -5,3 +5,11 @@ spring:
 eureka:
   instance:
     instanceId: ${spring.application.name}:${random.string}
+    
+    
+user-client:
+  ribbon:
+    listOfServers: http://localhost:5000
+    connectionTimeout: 5000
+    readTimeout: 5000
+    isSecure: false

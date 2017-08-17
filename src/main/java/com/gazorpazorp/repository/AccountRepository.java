@@ -14,4 +14,6 @@ public interface AccountRepository extends PagingAndSortingRepository<Account, L
 	List<Account> findAccountsByUserId(@Param("userId") Long userId);
 	
 	Account findAccountById(@Param("id") Long id);
+	
+	Account findByFirstName(@Param("firstName")String firstName);
 }

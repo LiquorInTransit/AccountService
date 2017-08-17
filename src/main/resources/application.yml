@@ -4,6 +4,10 @@ server:
  #   contextPath: /accounts
  # use-forward-headers: false
 
+logging:
+  level:
+    org:
+      springframework: #DEBUG
 
 spring:
   profiles:
@@ -37,12 +41,12 @@ security:
         
    #   filter-order: 3
 #      userInfoUri: http://localhost:5000/uaa/user
-#    client:
-#      client-id: LITSystem
-#      client-secret: LITSystem
- #     accessTokenUri: http://localhost:5000/uaa/user
- #     grant-type: client_credentials
- #     scope: system
+    client:
+      client-id: LITSystem
+      client-secret: LITSystem
+      access-token-uri: http://localhost:5000/uaa/oauth/token
+      grant-type: client_credentials
+      scope: system
 
 ---
   
