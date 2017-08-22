@@ -6,14 +6,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.gazorpazorp.client.config.TokenRequestClientConfiguration;
+import com.gazorpazorp.model.Account;
 import com.gazorpazorp.model.User;
 
-@FeignClient(name = "user-client", configuration = TokenRequestClientConfiguration.class)
-public interface UserClient {
+@FeignClient(name = "driver-client", configuration = TokenRequestClientConfiguration.class)
+public interface DriverClient {
 
-	@PostMapping(value = "/uaa/create/", consumes = "application/json")
-	public User createUser (User user);
+	@PostMapping(value = "/drivers/", consumes = "application/json")
+	public User createDriver (Account account);
 	
-	@DeleteMapping(value = "/uaa/delete/{id}")
-	public boolean deleteUserById(@PathVariable("id") Long id);
+	@DeleteMapping(value = "/drivers/{userId}")
+	public boolean deleteDriverByUserId(@PathVariable("userId") Long userId);
 }
