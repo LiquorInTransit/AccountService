@@ -1,6 +1,7 @@
 package com.gazorpazorp.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -8,8 +9,12 @@ import com.gazorpazorp.client.CustomerClient;
 import com.gazorpazorp.client.DriverClient;
 import com.gazorpazorp.client.UserClient;
 import com.gazorpazorp.model.Account;
+import com.gazorpazorp.model.Customer;
+import com.gazorpazorp.model.Driver;
 import com.gazorpazorp.model.User;
 import com.gazorpazorp.model.dto.AccountCreationDto;
+import com.gazorpazorp.repository.CustomerRepository;
+import com.gazorpazorp.repository.DriverRepository;
 
 @Service
 public class AccountService {
@@ -18,10 +23,28 @@ public class AccountService {
 //	private AccountRepository accountRepository;
 	@Autowired
 	private UserClient userClient;
+//	@Autowired
+//	private CustomerClient customerClient;
+//	@Autowired
+//	private DriverClient driverClient;
+	
 	@Autowired
-	private CustomerClient customerClient;
+	CustomerRepository customerRepo;
 	@Autowired
-	private DriverClient driverClient;
+	DriverRepository driverRepo;
+	
+	@Autowired
+	CustomerService customerService;
+	@Autowired
+	DriverService driverService;
+	
+	
+//	public Customer getCurrentCustomer () {
+//		return customerRepo.findByUserId(Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName()));
+//	}
+//	public Driver getCurrentDriver () {
+//		return driverRepo.findByUserId(Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName()));
+//	}
 //	@Autowired
 ////	@LoadBalanced
 //	OAuth2RestTemplate oAuth2RestTemplate;
@@ -66,25 +89,16 @@ public class AccountService {
 		account.setFirstName(dto.getFirstName());
 		account.setLastName(dto.getLastName());
 		account.setUserId(user.getId());
-		try {			
-			customerClient.createCustomer(account);
-			driverClient.createDriver(account);
-		} catch (Exception e) {
-			deleteAccountsByUserId(user.getId());
-		}
+			
+		customerService.createCustomer(new Customer(user.getId(), dto.getFirstName(), dto.getLastName(), dto.getAddress()));
+		driverService.createDriver(new Driver
+				
+				
+				
+				(user.getId(), dto.getFirstName(), dto.getLastName(), dto.getAddress()));
+		
 //		account = accountRepository.save(account);
 		
 		return null;
-	}
-	
-	private boolean deleteAccountsByUserId (Long id) {
-		try {
-			userClient.deleteUserById(id);
-			customerClient.deleteCustomerByUserId(id);
-			driverClient.deleteDriverByUserId(id);
-		} catch (Exception e) {
-			return false;
-		}
-		return true;
 	}
 }
