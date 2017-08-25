@@ -7,23 +7,23 @@ eureka:
     instanceId: ${spring.application.name}:${random.string}
     
     
-user-client:
-  ribbon:
-    listOfServers: http://localhost:5000
-    connectionTimeout: 5000
-    readTimeout: 5000
-    isSecure: false
+#uaa-service:
+#  ribbon:
+#    listOfServers: http://localhost:5000
+#    connectionTimeout: 5000
+#    readTimeout: 5000
+#    isSecure: false
     
-customer-client:
-  ribbon:
-    listOfServers: http://localhost:8001
-    connectionTimeout: 5000
-    readTimeout: 5000
-    isSecure: false
+#customer-client:
+#  ribbon:
+#    listOfServers: http://localhost:8001
+#    connectionTimeout: 5000
+#    readTimeout: 5000
+#    isSecure: false
     
-driver-client:
-  ribbon:
-    listOfServers: http://localhost:8002
-    connectionTimeout: 5000
-    readTimeout: 5000
-    isSecure: false
+#driver-client:
+#  ribbon:
+#    listOfServers: http://localhost:8002
+#    connectionTimeout: 5000
+#    readTimeout: 5000
+#    isSecure: false

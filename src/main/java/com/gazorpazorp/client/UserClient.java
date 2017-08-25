@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.gazorpazorp.client.config.TokenRequestClientConfiguration;
 import com.gazorpazorp.model.User;
 
-@FeignClient(name = "user-client", configuration = TokenRequestClientConfiguration.class)
+@FeignClient(name = "uaa-service", configuration = TokenRequestClientConfiguration.class)
 public interface UserClient {
 
 	@PostMapping(value = "/uaa/create/", consumes = "application/json")

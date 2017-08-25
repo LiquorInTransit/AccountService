@@ -11,6 +11,5 @@ import com.gazorpazorp.model.Customer;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long>{
 	public void deleteByUserId(@Param("userId") Long userId);
-	
 	Customer findByUserId(@Param("userId") Long userId);
 }

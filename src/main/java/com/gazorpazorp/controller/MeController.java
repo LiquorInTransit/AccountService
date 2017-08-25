@@ -29,6 +29,14 @@ public class MeController {
 				.map(c -> new ResponseEntity<Customer>(c, HttpStatus.OK))
 				.orElseThrow(() -> new Exception("Customer for user does not exist"));
 	}
+//	@PreAuthorize("#oauth2.hasScope('system')")
+//	@GetMapping("/accoustomersunts/{id}")
+//	public ResponseEntity getCustomerById(@PathVariable Long id) throws Exception{
+//		System.out.println("getAccountById: " + id);
+//		return Optional.ofNullable(customerService.getAccountById(id))
+//				.map(a -> new ResponseEntity<Account>(a, HttpStatus.OK))
+//				.orElseThrow(() -> new Exception("Account does not exist"));
+//	}
 	
 	@GetMapping("/drivers/me")
 	@PreAuthorize("#oauth2.hasScope('read')")
