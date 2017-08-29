@@ -1,15 +1,12 @@
 create table CUSTOMER (
 	id INTEGER PRIMARY KEY,
 	user_id INTEGER,
-	first_name VARCHAR(50),
-	last_name VARCHAR(50),
-	address VARCHAR(255)
+	address VARCHAR(255),
+	payment_method VARCHAR(255)
 );
 
 create table DRIVER (
 	id INTEGER PRIMARY KEY,
 	user_id INTEGER,
-	first_name VARCHAR(50),
-	last_name VARCHAR(50),
-	address VARCHAR(255)
+	car VARCHAR(255)
 );

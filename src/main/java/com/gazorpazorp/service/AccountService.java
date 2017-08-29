@@ -34,14 +34,14 @@ public class AccountService {
 		user = userClient.createUser(user);
 		
 		Assert.notNull(user, "An unexpected error occurred.");
-		Account account = new Account();
-		account.setAddress(dto.getAddress());
-		account.setFirstName(dto.getFirstName());
-		account.setLastName(dto.getLastName());
-		account.setUserId(user.getId());
+//		Account account = new Account();
+//		account.setAddress(dto.getAddress());
+//		account.setFirstName(dto.getFirstName());
+//		account.setLastName(dto.getLastName());
+//		account.setUserId(user.getId());
 			
-		customerService.createCustomer(new Customer(user.getId(), dto.getFirstName(), dto.getLastName(), dto.getAddress()));
-		driverService.createDriver(new Driver(user.getId(), dto.getFirstName(), dto.getLastName(), dto.getAddress()));
+		customerService.createCustomer(new Customer(user.getId()));
+		driverService.createDriver(new Driver(user.getId()));
 		return null;
 	}
 }

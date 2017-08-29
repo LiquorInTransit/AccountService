@@ -14,19 +14,12 @@ public class Driver {
 
 	private Long id;
 	private Long userId;
-	private String firstName;
-	private String lastName;
-	private String address;
+	private String car;
 	
 	public Driver() {}
-	
-
-	public Driver(Long userId, String firstName, String lastName, String address) {
+	public Driver(Long userId) {
 		super();
 		this.userId = userId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.address = address;
 	}
 
 
@@ -49,27 +42,13 @@ public class Driver {
 		this.userId = userId;
 	}
 
-	@Column(name = "first_name", length = 30)
-	public String getFirstName() {
-		return firstName;
+	@Column(name = "car", length = 20)
+	public String getCar() {
+		return car;
 	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setCar(String car) {
+		this.car = car;
 	}
-
-	@Column(name = "last_name", length = 30)
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	@Column(name = "address", length = 255)
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
+	
+	
 }

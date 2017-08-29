@@ -1,5 +1,7 @@
 package com.gazorpazorp.model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,22 +16,16 @@ public class Customer {
 
 	private Long id;
 	private Long userId;
-	private String firstName;
-	private String lastName;
 	private String address;
+	private String paymentMethod;
 	
 	public Customer() {}
 	
-	
 
-	public Customer(Long userId, String firstName, String lastName, String address) {
+	public Customer(Long userId) {
 		super();
 		this.userId = userId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.address = address;
 	}
-
 
 
 	@Id
@@ -51,22 +47,6 @@ public class Customer {
 		this.userId = userId;
 	}
 
-	@Column(name = "first_name", length = 30)
-	public String getFirstName() {
-		return firstName;
-	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	@Column(name = "last_name", length = 30)
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
 	@Column(name = "address", length = 255)
 	public String getAddress() {
 		return address;
@@ -74,4 +54,14 @@ public class Customer {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
+	@Column(name = "payment_method", length = 255)
+	public String getPaymentMethod() {
+		return paymentMethod;
+	}
+	public void setPaymentMethod(String paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+	
+	
 }
