@@ -23,7 +23,7 @@ public class MeController {
 	DriverService driverService;
 	
 	@GetMapping("/me")
-	@PreAuthorize("#oauth2.hasScope('read')")
+	@PreAuthorize("#oauth2.hasScope('customer')")
 	public ResponseEntity<Customer> getCurrentCustomer() throws Exception {
 		return Optional.ofNullable(customerService.getCurrentCustomer())
 				.map(c -> new ResponseEntity<Customer>(c, HttpStatus.OK))
@@ -39,7 +39,7 @@ public class MeController {
 //	}
 	
 	@GetMapping("/drivers/me")
-	@PreAuthorize("#oauth2.hasScope('read')")
+	@PreAuthorize("#oauth2.hasScope('driver')")
 	public ResponseEntity<Driver> getCurrentDriver() throws Exception {
 		return Optional.ofNullable(driverService.getCurrentDriver())
 				.map(d -> new ResponseEntity<Driver>(d, HttpStatus.OK))
