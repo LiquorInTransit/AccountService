@@ -1,14 +1,13 @@
 package com.gazorpazorp.service;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Service;
 
+import com.gazorpazorp.client.UserClient;
 import com.gazorpazorp.model.Customer;
+import com.gazorpazorp.model.dto.CustomerDetailsDto;
+import com.gazorpazorp.model.dtoMapper.CustomerMapper;
 import com.gazorpazorp.repository.CustomerRepository;
 
 @Service
@@ -17,8 +16,13 @@ public class CustomerService {
 	@Autowired
 	CustomerRepository customerRepo;
 	
-	public Customer getCurrentCustomer () {
-		return customerRepo.findByUserId(Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName()));
+	@Autowired
+	UserClient userClient;
+	
+	//use the userClietn to get the user, adn put everything to gether into a CustomerMeDto
+	public CustomerDetailsDto getCurrentCustomer () {
+		Long id = Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName());
+		return CustomerMapper.INSTANCE.customerAndUserToCustomerDetailsDto(customerRepo.findByUserId(id), userClient.getUserById(id));
 	}
 	
 	public Customer createCustomer (Customer customer) {
