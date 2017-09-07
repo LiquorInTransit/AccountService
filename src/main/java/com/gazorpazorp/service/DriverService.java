@@ -19,10 +19,10 @@ public class DriverService {
 	UserClient userClient;
 	
 	//use the userClietn to get the user, adn put everything to gether into a CustomerMeDto
-	public DriverDetailsDto getCurrentDriver () {
-		
+	public Driver getCurrentDriver () {
 		Long id = Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName());
-		return DriverMapper.INSTANCE.customerAndUserToCustomerDetailsDto(driverRepo.findByUserId(id), userClient.getUserById(id));
+//		return DriverMapper.INSTANCE.customerAndUserToCustomerDetailsDto(driverRepo.findByUserId(id), userClient.getUserById(id));
+		return driverRepo.findByUserId(id);
 	}
 	
 	public Driver createDriver(Driver driver) {

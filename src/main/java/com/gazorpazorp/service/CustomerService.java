@@ -20,9 +20,10 @@ public class CustomerService {
 	UserClient userClient;
 	
 	//use the userClietn to get the user, adn put everything to gether into a CustomerMeDto
-	public CustomerDetailsDto getCurrentCustomer () {
+	public Customer getCurrentCustomer () {
 		Long id = Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName());
-		return CustomerMapper.INSTANCE.customerAndUserToCustomerDetailsDto(customerRepo.findByUserId(id), userClient.getUserById(id));
+//		return CustomerMapper.INSTANCE.customerAndUserToCustomerDetailsDto(customerRepo.findByUserId(id), userClient.getUserById(id));
+		return customerRepo.findByUserId(id);
 	}
 	
 	public Customer createCustomer (Customer customer) {
