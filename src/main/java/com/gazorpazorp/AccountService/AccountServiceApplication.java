@@ -3,12 +3,18 @@ package com.gazorpazorp.AccountService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.cloud.commons.util.InetUtils;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.eureka.EurekaInstanceConfigBean;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+
+import com.netflix.appinfo.AmazonInfo;
 
 @SpringBootApplication(scanBasePackages="com.gazorpazorp")
 @EnableJpaRepositories("com.gazorpazorp.repository")
@@ -24,6 +30,33 @@ public class AccountServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AccountServiceApplication.class, args);
 	}
+	
+	@Bean
+	@Profile("!dev")
+	public EurekaInstanceConfigBean eurekaInstanceConfigBean(InetUtils utils) 
+	{
+		EurekaInstanceConfigBean instance = new EurekaInstanceConfigBean(utils);
+		AmazonInfo info = AmazonInfo.Builder.newBuilder().autoBuild("eureka");
+		instance.setHostname(info.get(AmazonInfo.MetaDataKey.publicHostname));
+		instance.setIpAddress(info.get(AmazonInfo.MetaDataKey.publicIpv4));
+		instance.setDataCenterInfo(info);
+		instance.setNonSecurePort(8080);
+		return instance;
+	}	
+	
+//	@Bean
+//	UserInfoRestTemplateCustomizer oauth2RestTemplateCustomizer(RetryLoadBalancerInterceptor interceptor) {
+//	    List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
+//	    interceptors.add(interceptor);
+//	    return template -> {
+//	        AccessTokenProviderChain accessTokenProviderChain = Stream
+//	                .of(new AuthorizationCodeAccessTokenProvider(), new ImplicitAccessTokenProvider(),
+//	                        new ResourceOwnerPasswordAccessTokenProvider(), new ClientCredentialsAccessTokenProvider())
+//	                .peek(tp -> tp.setInterceptors(interceptors))
+//	                .collect(Collectors.collectingAndThen(Collectors.toList(), AccessTokenProviderChain::new));
+//	        template.setAccessTokenProvider(accessTokenProviderChain);
+//	    };
+//	}
 	
 //	@PostConstruct
 //	public void getDbManager(){
