@@ -7,8 +7,14 @@ server:
 logging:
   file: log.log
   level:
-    org:
-      springframework: #DEBUG
+    com:
+      netflix:
+        discovery:
+          internal:
+            util:
+              Archaius1Utils: ERROR
+          endpoint:
+            EndpointUtils: ERROR
 
 spring:
   datasource:
