@@ -30,9 +30,7 @@
              cidr_ip: 172.31.0.0/16
            
            - proto: tcp
-             ports:
-               - 80
-               - 22
+             ports: 22
              cidr_ip: 0.0.0.0/0
 
     - name: Provision an instance
