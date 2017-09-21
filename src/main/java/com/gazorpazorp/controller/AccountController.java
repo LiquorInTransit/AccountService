@@ -14,14 +14,14 @@ import com.gazorpazorp.model.dto.AccountCreationDto;
 import com.gazorpazorp.service.AccountService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/accounts")
 public class AccountController {
 	
 	@Autowired
 	private AccountService accountService;
 	
 	@PreAuthorize("#oauth2.hasScope('signup')")
-	@PostMapping("/accounts")
+	@PostMapping
 	public ResponseEntity createAccounts (@RequestBody AccountCreationDto accountDto) {
 		Account account = accountService.createAccounts(accountDto);
 		return new ResponseEntity(account, HttpStatus.OK);

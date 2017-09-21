@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gazorpazorp.model.Customer;
@@ -29,14 +32,15 @@ public class MeController {
 				.map(c -> new ResponseEntity<Customer>(c, HttpStatus.OK))
 				.orElseThrow(() -> new Exception("Customer for user does not exist"));
 	}
-//	@PreAuthorize("#oauth2.hasScope('system')")
-//	@GetMapping("/accoustomersunts/{id}")
-//	public ResponseEntity getCustomerById(@PathVariable Long id) throws Exception{
-//		System.out.println("getAccountById: " + id);
-//		return Optional.ofNullable(customerService.getAccountById(id))
-//				.map(a -> new ResponseEntity<Account>(a, HttpStatus.OK))
-//				.orElseThrow(() -> new Exception("Account does not exist"));
-//	}
+	
+	
+	@PostMapping("/me")
+	@PreAuthorize("#oauth2.hasScope('customer')")
+	public ResponseEntity updateCustomerProfilePic(@RequestBody byte[] profilePic) throws Exception {
+		return new ResponseEntity(customerService.updateProfilePic(profilePic), HttpStatus.OK);
+//		return new ResponseEntity(customerService.updateCurrentCustomer(customer), HttpStatus.OK);
+		
+	}
 	
 	@GetMapping("/drivers/me")
 	@PreAuthorize("#oauth2.hasScope('driver')")
@@ -44,5 +48,13 @@ public class MeController {
 		return Optional.ofNullable(driverService.getCurrentDriver())
 				.map(d -> new ResponseEntity<Driver>(d, HttpStatus.OK))
 				.orElseThrow(() -> new Exception("Customer for user does not exist"));
+	}
+	
+	@PostMapping("/drivers/me")
+	@PreAuthorize("#oauth2.hasScope('customer')")
+	public ResponseEntity updateDriverProfilePic(@RequestBody byte[] profilePic) throws Exception {
+		return new ResponseEntity(driverService.updateProfilePic(profilePic), HttpStatus.OK);
+//		return new ResponseEntity(customerService.updateCurrentCustomer(customer), HttpStatus.OK);
+		
 	}
 }
