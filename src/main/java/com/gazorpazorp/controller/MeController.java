@@ -51,7 +51,7 @@ public class MeController {
 	}
 	
 	@PostMapping("/drivers/me")
-	@PreAuthorize("#oauth2.hasScope('customer')")
+	@PreAuthorize("#oauth2.hasScope('driver')")
 	public ResponseEntity updateDriverProfilePic(@RequestBody byte[] profilePic) throws Exception {
 		return new ResponseEntity(driverService.updateProfilePic(profilePic), HttpStatus.OK);
 //		return new ResponseEntity(customerService.updateCurrentCustomer(customer), HttpStatus.OK);
