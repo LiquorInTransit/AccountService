@@ -16,6 +16,8 @@ public class Customer {
 
 	private Long id;
 	private Long userId;
+	private double latitude;
+	private double longitude;
 	private String address;
 	private String paymentMethod;
 	
@@ -46,6 +48,21 @@ public class Customer {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
+	
+	public double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
 
 	@Column(name = "address", length = 255)
 	public String getAddress() {

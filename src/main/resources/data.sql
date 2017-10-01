@@ -1,4 +1,4 @@
-insert into CUSTOMER (id, user_id, address, payment_method) values (1, 1, '23 Crestwood Dr., Cambridge, ON, Canada', 'VISA');
+insert into CUSTOMER (id, user_id, latitude, longitude, address, payment_method) values (1, 1, 43.3441607, -80.3318641, '23 Crestwood Dr., Cambridge, ON, Canada', 'VISA');
 insert into CUSTOMER (id, user_id, address, payment_method) values (2, 2, '374 Tallwood Ave, Richmond Hill, NY, USA', 'AE');
 insert into CUSTOMER (id, user_id, address, payment_method) values (3, 3, '31 Ohio St, Concord, NH, USA', 'MASTERCARD');
 insert into CUSTOMER (id, user_id, address, payment_method) values (4, 4, '7440 W. Willow Ave, Kansas City, MO, USA', 'VISA');
