@@ -1,5 +1,8 @@
 package com.gazorpazorp.AccountService;
 
+import javax.annotation.PostConstruct;
+
+import org.hsqldb.util.DatabaseManagerSwing;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -58,10 +61,10 @@ public class AccountServiceApplication {
 //	    };
 //	}
 	
-//	@PostConstruct
-//	public void getDbManager(){
-//	   DatabaseManagerSwing.main(
-//		new String[] { "--url", "jdbc:hsqldb:mem:test1://localhost/test1", "--user", "SA", "--password", ""});
-//	}
+	@PostConstruct
+	public void getDbManager(){
+	   DatabaseManagerSwing.main(
+		new String[] { "--url", "jdbc:hsqldb:mem:test://localhost/test?characterEncoding=UTF-8", "--user", "SA", "--password", ""});
+	}
 }
 

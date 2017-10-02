@@ -1,8 +1,8 @@
 create table CUSTOMER (
 	id INTEGER PRIMARY KEY,
 	user_id INTEGER,
-	latitude DECIMAL,
-	longitude DECIMAL,
+	latitude DECIMAL(12, 8),
+	longitude DECIMAL(12, 8),
 	address VARCHAR(255),
 	payment_method VARCHAR(255)
 );
