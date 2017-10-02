@@ -1,7 +1,7 @@
 package com.gazorpazorp.model.dto;
 
 public class AccountCreationDto {
-	private String username;
+	private String email;
 	private String password;
 	private String firstName;
 	private String lastName;
@@ -11,11 +11,11 @@ public class AccountCreationDto {
 	public AccountCreationDto() {}
 	
 	
-	public String getUsername() {
-		return username;
+	public String getEmail() {
+		return email;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getPassword() {
 		return password;

@@ -25,12 +25,12 @@ public class AccountService {
 	DriverService driverService;
 	
 	/*Steps:
-	 * 1. Check for USER by username (create and/or return USER)
+	 * 1. Check for USER by email (create and/or return USER)
 	 * 2. Check for CUSTOMER by user_id
 	 * 3. Create and/or return CUSTOMER
 	 */
 	public Account createAccounts(AccountCreationDto dto) {
-		User user = new User(dto.getUsername(), dto.getPassword());
+		User user = new User(dto.getEmail(), dto.getPassword());
 		user = userClient.createUser(user);
 		
 		Assert.notNull(user, "An unexpected error occurred.");
