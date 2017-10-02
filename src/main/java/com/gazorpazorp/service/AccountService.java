@@ -1,6 +1,7 @@
 package com.gazorpazorp.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -29,14 +30,17 @@ public class AccountService {
 	 * 2. Check for CUSTOMER by user_id
 	 * 3. Create and/or return CUSTOMER
 	 */
-	public Account createAccounts(AccountCreationDto dto) {
-		User user = new User(dto.getEmail(), dto.getPassword());
-		user = userClient.createUser(user);
-		
-		Assert.notNull(user, "An unexpected error occurred.");
+	public void createAccounts(AccountCreationDto dto) throws Exception {
+		try {
+			User user = new User(dto.getEmail(), dto.getPassword());
+			user = userClient.createUser(user);
 			
-		customerService.createCustomer(new Customer(user.getId()));
-		driverService.createDriver(new Driver(user.getId()));
-		return null;
+			Assert.notNull(user, "An unexpected error occurred.");
+				
+			customerService.createCustomer(new Customer(user.getId()));
+			driverService.createDriver(new Driver(user.getId()));
+		} catch (Exception e) {
+			throw new Exception("There was an error creating the accounts");
+		}
 	}
 }
