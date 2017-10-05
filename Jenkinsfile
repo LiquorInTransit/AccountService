@@ -1,7 +1,7 @@
 node {
-   stage('delete') {
-   	deleteDir()
-   }
+//   stage('delete') {
+//   	deleteDir()
+//   }
    stage('Preparation') {
    		git 'https://github.com/LiquorInTransit/AccountService.git'
    }
