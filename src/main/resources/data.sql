@@ -4,7 +4,7 @@ insert into CUSTOMER (id, user_id, location_address, location_city, location_pos
 insert into CUSTOMER (id, user_id, location_address, location_city, location_postal_code, location_latitude, location_longitude, payment_method) values (4, 4, '23 Crestwood Dr.', 'Cambridge', 'N1S3N8', 43.3440436, -80.3302874, 'VISA');
 insert into CUSTOMER (id, user_id, location_address, location_city, location_postal_code, location_latitude, location_longitude, payment_method) values (5, 5, '23 Crestwood Dr.', 'Cambridge', 'N1S3N8', 43.3440436, -80.3302874, 'VISA');
 
-insert into DRIVER (id, user_id, car) values (1, 1, 'Honda Civic');
+insert into DRIVER (id, user_id, car) values (1, 1, 'Honda Civic'); 
 insert into DRIVER (id, user_id, car) values (2, 2, 'Hyundai Accent');
 insert into DRIVER (id, user_id, car) values (3, 3, 'Audi A4');
 insert into DRIVER (id, user_id, car) values (4, 4, 'Hummer');
