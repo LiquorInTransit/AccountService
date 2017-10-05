@@ -5,7 +5,6 @@ public class AccountCreationDto {
 	private String password;
 	private String firstName;
 	private String lastName;
-	private String address;
 	
 	
 	public AccountCreationDto() {}
@@ -34,12 +33,6 @@ public class AccountCreationDto {
 	}
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
 	}
 	
 	

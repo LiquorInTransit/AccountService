@@ -32,7 +32,7 @@ public class AccountService {
 	 */
 	public void createAccounts(AccountCreationDto dto) throws Exception {
 		try {
-			User user = new User(dto.getEmail(), dto.getPassword());
+			User user = new User(dto.getEmail(), dto.getPassword(), dto.getFirstName(), dto.getLastName());
 			user = userClient.createUser(user);
 			
 			Assert.notNull(user, "An unexpected error occurred.");

@@ -1,8 +1,7 @@
 package com.gazorpazorp.model;
 
-import java.util.Set;
-
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,10 +15,9 @@ public class Customer {
 
 	private Long id;
 	private Long userId;
-	private Double latitude;
-	private Double longitude;
-	private String address;
-	private String paymentMethod;
+	private String paymentMethod;	
+	@Embedded
+	private Location location;
 	
 	public Customer() {}
 	
@@ -49,28 +47,28 @@ public class Customer {
 		this.userId = userId;
 	}
 	
-	public Double getLatitude() {
-		return latitude;
-	}
-	public void setLatitude(Double latitude) {
-		this.latitude = latitude;
-	}
-
-	public Double getLongitude() {
-		return longitude;
-	}
-	public void setLongitude(Double longitude) {
-		this.longitude = longitude;
-	}
-
-
-	@Column(name = "address", length = 255)
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
+//	public Double getLatitude() {
+//		return latitude;
+//	}
+//	public void setLatitude(Double latitude) {
+//		this.latitude = latitude;
+//	}
+//
+//	public Double getLongitude() {
+//		return longitude;
+//	}
+//	public void setLongitude(Double longitude) {
+//		this.longitude = longitude;
+//	}
+//
+//
+//	@Column(name = "address", length = 255)
+//	public String getAddress() {
+//		return address;
+//	}
+//	public void setAddress(String address) {
+//		this.address = address;
+//	}
 
 	@Column(name = "payment_method", length = 255)
 	public String getPaymentMethod() {
@@ -79,6 +77,16 @@ public class Customer {
 	public void setPaymentMethod(String paymentMethod) {
 		this.paymentMethod = paymentMethod;
 	}
+
+
+	public Location getLocation() {
+		return location;
+	}
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+	
+	
 	
 	
 }

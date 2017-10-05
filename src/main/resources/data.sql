@@ -1,8 +1,8 @@
-insert into CUSTOMER (id, user_id, latitude, longitude, address, payment_method) values (1, 1, 43.3441607, -80.3318641, '23 Crestwood Dr., Cambridge, ON, Canada', 'VISA');
-insert into CUSTOMER (id, user_id, address, payment_method) values (2, 2, '374 Tallwood Ave, Richmond Hill, NY, USA', 'AE');
-insert into CUSTOMER (id, user_id, address, payment_method) values (3, 3, '31 Ohio St, Concord, NH, USA', 'MASTERCARD');
-insert into CUSTOMER (id, user_id, address, payment_method) values (4, 4, '7440 W. Willow Ave, Kansas City, MO, USA', 'VISA');
-insert into CUSTOMER (id, user_id, address, payment_method) values (5, 5, '8546 Plumb Branch St, Long Beach, NY, USA', 'VISA');
+insert into CUSTOMER (id, user_id, location_address, location_city, location_postal_code, location_latitude, location_longitude, payment_method) values (1, 1, '23 Crestwood Dr.', 'Cambridge', 'N1S3N8', 43.3440436, -80.3302874, 'VISA');
+insert into CUSTOMER (id, user_id, location_address, location_city, location_postal_code, location_latitude, location_longitude, payment_method) values (2, 2, '23 Crestwood Dr.', 'Cambridge', 'N1S3N8', 43.3440436, -80.3302874, 'AE');
+insert into CUSTOMER (id, user_id, location_address, location_city, location_postal_code, location_latitude, location_longitude, payment_method) values (3, 3, '23 Crestwood Dr.', 'Cambridge', 'N1S3N8', 43.3440436, -80.3302874, 'MASTERCARD');
+insert into CUSTOMER (id, user_id, location_address, location_city, location_postal_code, location_latitude, location_longitude, payment_method) values (4, 4, '23 Crestwood Dr.', 'Cambridge', 'N1S3N8', 43.3440436, -80.3302874, 'VISA');
+insert into CUSTOMER (id, user_id, location_address, location_city, location_postal_code, location_latitude, location_longitude, payment_method) values (5, 5, '23 Crestwood Dr.', 'Cambridge', 'N1S3N8', 43.3440436, -80.3302874, 'VISA');
 
 insert into DRIVER (id, user_id, car) values (1, 1, 'Honda Civic');
 insert into DRIVER (id, user_id, car) values (2, 2, 'Hyundai Accent');

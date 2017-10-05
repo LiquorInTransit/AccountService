@@ -17,7 +17,6 @@ public interface CustomerMapper {
 	@Mapping(target="firstName")
 	@Mapping(target="lastName")
 	@Mapping(target="email")
-	@Mapping(target="address")
 	@Mapping(target="paymentMethod")
 	CustomerDetailsDto customerAndUserToCustomerDetailsDto(Customer customer, User user);
 }
