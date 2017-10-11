@@ -10,15 +10,18 @@ public class User {
 	private String firstName;
 	private String lastName;
 	
+	private String phone;
+	
 	public User() {}
 	
 	
 	
-	public User(String email, String password, String firstName, String lastName) {
+	public User(String email, String password, String firstName, String lastName, String phone) {
 		this.email = email;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.phone = phone;
 	}
 
 
@@ -62,6 +65,15 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+
 
 	@Override
 	public String toString() {
