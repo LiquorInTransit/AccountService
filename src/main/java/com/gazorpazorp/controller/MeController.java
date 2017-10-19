@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gazorpazorp.client.ImgurClient;
 import com.gazorpazorp.model.Customer;
 import com.gazorpazorp.model.Driver;
+import com.gazorpazorp.model.imgur.ImgurResp;
 import com.gazorpazorp.service.CustomerService;
 import com.gazorpazorp.service.DriverService;
 
@@ -23,6 +25,9 @@ public class MeController {
 	CustomerService customerService;
 	@Autowired
 	DriverService driverService;
+	
+	@Autowired
+	ImgurClient imgurClient;
 	
 	@GetMapping("/me")
 	@PreAuthorize("#oauth2.hasScope('customer')")
@@ -50,4 +55,13 @@ public class MeController {
 //		return new ResponseEntity(customerService.updateCurrentCustomer(customer), HttpStatus.OK);
 		
 	}
+	
+	
+//	@GetMapping("/test")
+//	public ImgurResp test () {
+//		System.out.println("We're about to enter the client");
+//		ResponseEntity<ImgurResp> resp = imgurClient.response();
+//		System.out.println("We got out of the client");
+//		return resp.getBody();
+//	}
 }
