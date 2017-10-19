@@ -18,6 +18,7 @@ public class Customer {
 	private String paymentMethod;	
 	@Embedded
 	private Location location;
+	private String profileImageId;
 	
 	public Customer() {}
 	
@@ -84,6 +85,14 @@ public class Customer {
 	}
 	public void setLocation(Location location) {
 		this.location = location;
+	}
+
+	@Column(name="profile_image")
+	public String getProfileImageId() {
+		return profileImageId;
+	}
+	public void setProfileImageId(String profileImageId) {
+		this.profileImageId = profileImageId;
 	}
 	
 	
