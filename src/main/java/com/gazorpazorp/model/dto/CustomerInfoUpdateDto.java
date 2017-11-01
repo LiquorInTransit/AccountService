@@ -5,7 +5,7 @@ import com.gazorpazorp.model.Location;
 
 public class CustomerInfoUpdateDto {
 	private Location location;
-	private String profileImageId;
+	private String file;
 	
 	
 	
@@ -16,17 +16,15 @@ public class CustomerInfoUpdateDto {
 		this.location = location;
 	}
 	
-	public String getProfileImageId() {
-		return profileImageId;
+	public String getFile() {
+		return file;
 	}
-	public void setProfileImageId(String profileImageId) {
-		this.profileImageId = profileImageId;
+	public void setFile(String file) {
+		this.file = file;
 	}
 	
 	public void Incorporate (Customer customer) {
 		if (location != null) 
 			customer.setLocation(location);		
-		if (profileImageId != null)
-			customer.setProfileImageId(profileImageId);
 	}
 }

@@ -2,6 +2,8 @@ package com.gazorpazorp.controller;
 
 import java.util.Optional;
 
+import javax.servlet.annotation.MultipartConfig;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,7 @@ import com.gazorpazorp.service.CustomerService;
 
 @RestController
 @RequestMapping("/api/accounts")
+@MultipartConfig(fileSizeThreshold = 20971520)
 public class AccountController {
 	
 	@Autowired
@@ -33,7 +36,7 @@ public class AccountController {
 		return new ResponseEntity(HttpStatus.OK);						
 	}
 	
-	@PatchMapping("/me")
+	@PatchMapping(value="/me")
 	@PreAuthorize("#oauth2.hasScope('customer')")
 	public ResponseEntity updateCustomerProfilePic(@RequestBody CustomerInfoUpdateDto dto) throws Exception {
 		return Optional.ofNullable(customerService.updateCustomer(dto))

@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.gazorpazorp.client.ImgurClient;
 import com.gazorpazorp.client.UserClient;
 import com.gazorpazorp.model.Customer;
 import com.gazorpazorp.model.dto.CustomerInfoUpdateDto;
+import com.gazorpazorp.model.imgur.ImgurResp;
 import com.gazorpazorp.repository.CustomerRepository;
 
 @Service
@@ -19,6 +21,8 @@ public class CustomerService {
 	
 	@Autowired
 	UserClient userClient;
+	@Autowired
+	ImgurClient imgurClient;
 	
 	private final Logger logger = LoggerFactory.getLogger(CustomerService.class);
 	
@@ -39,10 +43,27 @@ public class CustomerService {
 	
 	public Customer updateCustomer(CustomerInfoUpdateDto dto) {
 		Customer customer = getCurrentCustomer();
-		if (customer != null) {
+		if (customer != null && dto != null) {
 			dto.Incorporate(customer);
+			try {
+				ImgurResp resp = uploadFile(dto.getFile());
+				if (resp != null) {
+					customer.setProfileImageId(resp.getData().getId());
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			return customerRepo.save(customer);
-		}		
+		}				
 		return null;
+	}
+	
+	private ImgurResp uploadFile(String file) throws Exception {
+		try {
+			return imgurClient.uploadImage(file, ImgurClient.ALBUM_ID).getBody();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }
