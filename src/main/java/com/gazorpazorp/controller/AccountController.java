@@ -33,7 +33,7 @@ public class AccountController {
 	@PostMapping
 	public ResponseEntity createAccounts (@RequestBody AccountCreationDto accountDto) throws Exception{
 		accountService.createAccounts(accountDto);
-		return new ResponseEntity(HttpStatus.OK);						
+		return new ResponseEntity(HttpStatus.OK);				
 	}
 	
 	@PatchMapping(value="/me")
