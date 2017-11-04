@@ -16,6 +16,8 @@ public class Driver {
 	private Long userId;
 	private String car;
 	
+	private String profileImageId;
+	
 	public Driver() {}
 	public Driver(Long userId) {
 		super();
@@ -49,6 +51,15 @@ public class Driver {
 	public void setCar(String car) {
 		this.car = car;
 	}
+	
+	@Column(name="profile_image_id")
+	public String getProfileImageId() {
+		return profileImageId;
+	}
+	public void setProfileImageId(String profileImageId) {
+		this.profileImageId = profileImageId;
+	}
+	
 	
 	
 }

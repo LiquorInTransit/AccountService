@@ -87,7 +87,7 @@ public class Customer {
 		this.location = location;
 	}
 
-	@Column(name="profile_image")
+	@Column(name="profile_image_id")
 	public String getProfileImageId() {
 		return profileImageId;
 	}

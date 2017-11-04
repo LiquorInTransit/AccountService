@@ -26,8 +26,8 @@ public class MeController {
 	@Autowired
 	DriverService driverService;
 	
-	@Autowired
-	ImgurClient imgurClient;
+//	@Autowired
+//	ImgurClient imgurClient;
 	
 	@GetMapping("/me")
 	@PreAuthorize("#oauth2.hasScope('customer')")
@@ -36,10 +36,7 @@ public class MeController {
 				.map(c -> new ResponseEntity<Customer>(c, HttpStatus.OK))
 				.orElseThrow(() -> new Exception("Customer for user does not exist"));
 	}
-	
-	
-	
-	
+		
 	@GetMapping("/drivers/me")
 	@PreAuthorize("#oauth2.hasScope('driver')")
 	public ResponseEntity<Driver> getCurrentDriver() throws Exception {
@@ -48,13 +45,13 @@ public class MeController {
 				.orElseThrow(() -> new Exception("Customer for user does not exist"));
 	}
 	
-	@PatchMapping("/accounts/drivers/me")
-	@PreAuthorize("#oauth2.hasScope('driver')")
-	public ResponseEntity updateDriverProfilePic(@RequestBody byte[] profilePic) throws Exception {
-		return new ResponseEntity(driverService.updateProfilePic(profilePic), HttpStatus.OK);
-//		return new ResponseEntity(customerService.updateCurrentCustomer(customer), HttpStatus.OK);
-		
-	}
+//	@PatchMapping("/accounts/drivers/me")
+//	@PreAuthorize("#oauth2.hasScope('driver')")
+//	public ResponseEntity updateDriverProfilePic(@RequestBody byte[] profilePic) throws Exception {
+//		return new ResponseEntity(driverService.updateProfilePic(profilePic), HttpStatus.OK);
+////		return new ResponseEntity(customerService.updateCurrentCustomer(customer), HttpStatus.OK);
+//		
+//	}
 	
 	
 //	@GetMapping("/test")
