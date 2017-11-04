@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.gazorpazorp.client.ImgurClient;
 import com.gazorpazorp.client.UserClient;
-import com.gazorpazorp.model.Customer;
 import com.gazorpazorp.model.Driver;
-import com.gazorpazorp.model.dto.DriverDetailsDto;
-import com.gazorpazorp.model.dtoMapper.DriverMapper;
+import com.gazorpazorp.model.dto.DriverInfoUpdateDto;
+import com.gazorpazorp.model.imgur.ImgurResp;
 import com.gazorpazorp.repository.DriverRepository;
 
 @Service
@@ -20,6 +20,8 @@ public class DriverService {
 	DriverRepository driverRepo;
 	@Autowired
 	UserClient userClient;
+	@Autowired
+	ImgurClient imgurClient;
 	
 	private final Logger logger = LoggerFactory.getLogger(DriverService.class);
 	
@@ -37,6 +39,31 @@ public class DriverService {
 		return null;
 	}
 	
+	public Driver updateDriver(DriverInfoUpdateDto dto) {
+		Driver driver = getCurrentDriver();
+		if (driver != null && dto != null) {
+			dto.Incorporate(driver);
+			try {
+				ImgurResp resp = uploadFile(dto.getFile());
+				if (resp != null) {
+					driver.setProfileImageId(resp.getData().getId());
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return driverRepo.save(driver);
+		}				
+		return null;
+	}
+	
+	private ImgurResp uploadFile(String file) throws Exception {
+		try {
+			return imgurClient.uploadImage(file, ImgurClient.ALBUM_ID).getBody();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
 	public Driver createDriver(Driver driver) {
 		return driverRepo.save(driver);
