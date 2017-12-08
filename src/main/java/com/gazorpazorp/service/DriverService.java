@@ -30,6 +30,10 @@ public class DriverService {
 		Long id = Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName());
 		return driverRepo.findByUserId(id);
 	}
+	public Driver getDriverById(Long id) {
+		return driverRepo.findById(id).orElse(null);
+	}
+	
 	public Driver updateProfilePic(byte[] profilePic) {
 		Driver driver = getCurrentDriver();
 		if (driver != null) {

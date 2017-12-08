@@ -7,14 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gazorpazorp.client.ImgurClient;
 import com.gazorpazorp.model.Customer;
 import com.gazorpazorp.model.Driver;
-import com.gazorpazorp.model.imgur.ImgurResp;
 import com.gazorpazorp.service.CustomerService;
 import com.gazorpazorp.service.DriverService;
 
@@ -42,7 +39,15 @@ public class MeController {
 	public ResponseEntity<Driver> getCurrentDriver() throws Exception {
 		return Optional.ofNullable(driverService.getCurrentDriver())
 				.map(d -> new ResponseEntity<Driver>(d, HttpStatus.OK))
-				.orElseThrow(() -> new Exception("Customer for user does not exist"));
+				.orElseThrow(() -> new Exception("Driver for user does not exist"));
+	}
+	
+	@GetMapping("/internal/drivers/{id}")
+	@PreAuthorize("#oauth2.hasScope('customer')")
+	public ResponseEntity<Driver> getDriverById(@PathVariable Long id) throws Exception {
+		return Optional.ofNullable(driverService.getDriverById(id))
+				.map(d -> new ResponseEntity<Driver>(d, HttpStatus.OK))
+				.orElseThrow(() -> new Exception("Driver with id '" + id + "' does not exist"));
 	}
 	
 //	@PatchMapping("/accounts/drivers/me")
