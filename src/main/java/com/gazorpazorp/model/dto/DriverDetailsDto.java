@@ -1,11 +1,13 @@
 package com.gazorpazorp.model.dto;
 
+import com.gazorpazorp.model.Driver.Car;
+
 public class DriverDetailsDto {
 	private Long id;
 	private String firstName;
 	private String lastName;
 	private String email;
-	private String car;
+	private Car car;
 	
 	
 	public Long getId() {
@@ -32,10 +34,10 @@ public class DriverDetailsDto {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getCar() {
+	public Car getCar() {
 		return car;
 	}
-	public void setCar(String car) {
+	public void setCar(Car car) {
 		this.car = car;
 	}
 	@Override

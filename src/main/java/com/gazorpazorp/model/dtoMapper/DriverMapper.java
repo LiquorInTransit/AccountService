@@ -18,5 +18,5 @@ public interface DriverMapper {
 	@Mapping(target="lastName")
 	@Mapping(target="email")
 	@Mapping(target="car")
-	DriverDetailsDto customerAndUserToCustomerDetailsDto(Driver driver, User user);
+	DriverDetailsDto driverAndUserToDriverDetailsDto(Driver driver, User user);
 }

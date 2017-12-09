@@ -2,8 +2,6 @@ package com.gazorpazorp.model;
 
 import javax.persistence.Embeddable;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
-
 @Embeddable
 public class Location {
 	private Double latitude;

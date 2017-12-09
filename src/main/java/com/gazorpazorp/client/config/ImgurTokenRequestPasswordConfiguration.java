@@ -15,20 +15,6 @@ import feign.RequestInterceptor;
 @EnableConfigurationProperties
 public class ImgurTokenRequestPasswordConfiguration {
 
-	
-//	public ClientCredentialsResourceDetails clientCredentialsResourceDetails() {
-//		return new ClientCredentialsResourceDetails();
-//	}	
-//	@Bean
-//	public RequestInterceptor oauth2FeignRequestInterceptor(){
-//		return new OAuth2FeignRequestInterceptor(new DefaultOAuth2ClientContext(), clientCredentialsResourceDetails());
-//	}
-//	@Bean
-//	public OAuth2RestTemplate clientCredentialsRestTemplate() {
-//		return new OAuth2RestTemplate(clientCredentialsResourceDetails());
-//	}
-
-	
 	@Bean
 	@ConfigurationProperties(prefix = "imgur.oauth2.resource")
 	public ResourceOwnerPasswordResourceDetails resourceOwnerPasswordResourceDetails() {

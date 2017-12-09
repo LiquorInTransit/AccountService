@@ -1,14 +1,15 @@
 package com.gazorpazorp.model.dto;
 
 import com.gazorpazorp.model.Driver;
+import com.gazorpazorp.model.Driver.Car;
 
 public class DriverInfoUpdateDto {
-	private String car;
+	private Car car;
 	private String file;
-	public String getCar() {
+	public Car getCar() {
 		return car;
 	}
-	public void setCar(String car) {
+	public void setCar(Car car) {
 		this.car = car;
 	}
 	public String getFile() {
