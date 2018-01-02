@@ -19,6 +19,7 @@ public class Customer {
 	@Embedded
 	private Location location;
 	private String profileImageId;
+	private String stripeId;
 	
 	public Customer() {}
 	
@@ -93,6 +94,13 @@ public class Customer {
 	}
 	public void setProfileImageId(String profileImageId) {
 		this.profileImageId = profileImageId;
+	}
+	@Column(name="stripe_id")
+	public String getStripeId() {
+		return stripeId;
+	}
+	public void setStripeId(String stripeId) {
+		this.stripeId = stripeId;
 	}
 	
 	
