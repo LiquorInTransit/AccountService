@@ -3,6 +3,7 @@ package com.gazorpazorp.controller;
 import java.util.Optional;
 
 import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,8 +36,8 @@ public class AccountController {
 	
 	@PreAuthorize("#oauth2.hasScope('signup')")
 	@PostMapping
-	public ResponseEntity createAccounts (@RequestBody AccountCreationDto accountDto) throws Exception{
-		accountService.createAccounts(accountDto);
+	public ResponseEntity createAccounts (@RequestBody AccountCreationDto accountDto, HttpServletRequest req) throws Exception{
+		accountService.createAccounts(accountDto, req);
 		return new ResponseEntity(HttpStatus.OK);				
 	}
 	

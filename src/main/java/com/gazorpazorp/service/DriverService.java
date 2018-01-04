@@ -1,8 +1,14 @@
 package com.gazorpazorp.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +18,8 @@ import com.gazorpazorp.model.Driver;
 import com.gazorpazorp.model.dto.DriverInfoUpdateDto;
 import com.gazorpazorp.model.imgur.ImgurResp;
 import com.gazorpazorp.repository.DriverRepository;
+import com.stripe.model.Account;
+import com.stripe.net.RequestOptions;
 
 @Service
 public class DriverService {
@@ -22,6 +30,9 @@ public class DriverService {
 	UserClient userClient;
 	@Autowired
 	ImgurClient imgurClient;
+	
+	@Value("${stripe.secret-key}")
+	String secretKey;
 	
 	private final Logger logger = LoggerFactory.getLogger(DriverService.class);
 	
@@ -69,11 +80,42 @@ public class DriverService {
 		}
 	}
 	
-	public Driver createDriver(Driver driver) {
+	public Driver createDriver(Driver driver, HttpServletRequest req) {
+		String stripeId = createNewStripeAccount(req);
+		if (stripeId == null)
+			return null;
+		driver.setStripeId(stripeId);
 		return driverRepo.save(driver);
 	}
 	
 	public void deleteDriverByUserId(Long userId) {
 		driverRepo.deleteByUserId(userId);
+	}
+	
+	private String createNewStripeAccount(HttpServletRequest req) {
+		RequestOptions reqopt = (new RequestOptions.RequestOptionsBuilder())
+				.setApiKey(secretKey)
+				.build();
+
+		try {
+			Map<String, Object> params = new HashMap<>();
+			params.put("type", "custom");
+			params.put("country", "CA");
+			params.put("legal_entity[type]", "individual");
+			params.put("legal_entity[first_name]", "John");
+			params.put("legal_entity[last_name]", "Smith");
+			params.put("legal_entity[address][city]", "Oakville");
+			params.put("legal_entity[dob][day]", 6);
+			params.put("legal_entity[dob][month]", 6);
+			params.put("legal_entity[dob][year]", 1966);
+			Integer now = (int) (System.currentTimeMillis()/1000L);
+			params.put("tos_acceptance[date]", now);
+			params.put("tos_acceptance[ip]", req.getRemoteAddr());			
+			Account account = Account.create(params, reqopt);
+			return account.getId();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

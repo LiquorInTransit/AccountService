@@ -1,18 +1,16 @@
 package com.gazorpazorp.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import com.gazorpazorp.client.UserClient;
-import com.gazorpazorp.model.Account;
 import com.gazorpazorp.model.Customer;
 import com.gazorpazorp.model.Driver;
 import com.gazorpazorp.model.User;
 import com.gazorpazorp.model.dto.AccountCreationDto;
-import com.gazorpazorp.repository.CustomerRepository;
-import com.gazorpazorp.repository.DriverRepository;
 
 @Service
 public class AccountService {
@@ -30,15 +28,19 @@ public class AccountService {
 	 * 2. Check for CUSTOMER by user_id
 	 * 3. Create and/or return CUSTOMER
 	 */
-	public void createAccounts(AccountCreationDto dto) throws Exception {
+	public void createAccounts(AccountCreationDto dto, HttpServletRequest req) throws Exception {
 		try {
 			User user = new User(dto.getEmail(), dto.getPassword(), dto.getFirstName(), dto.getLastName(), dto.getPhone());
 			user = userClient.createUser(user);
 			
 			Assert.notNull(user, "An unexpected error occurred.");
 				
-			customerService.createCustomer(new Customer(user.getId()));
-			driverService.createDriver(new Driver(user.getId()));
+			if (customerService.createCustomer(new Customer(user.getId()), dto.getEmail())==null) {
+				//handle the error
+			}
+			if (driverService.createDriver(new Driver(user.getId()), req)==null) {
+				//handle the error
+			}
 		} catch (Exception e) {
 			throw new Exception("There was an error creating the accounts");
 		}
