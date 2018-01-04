@@ -42,6 +42,7 @@ public class AccountService {
 				//handle the error
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new Exception("There was an error creating the accounts");
 		}
 	}
