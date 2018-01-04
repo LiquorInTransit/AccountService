@@ -43,11 +43,19 @@ public class MeController {
 	}
 	
 	@GetMapping("/internal/drivers/{id}")
-	@PreAuthorize("#oauth2.hasScope('customer')")
+//	@PreAuthorize("#oauth2.hasScope('customer')")
 	public ResponseEntity<Driver> getDriverById(@PathVariable Long id) throws Exception {
 		return Optional.ofNullable(driverService.getDriverById(id))
 				.map(d -> new ResponseEntity<Driver>(d, HttpStatus.OK))
 				.orElseThrow(() -> new Exception("Driver with id '" + id + "' does not exist"));
+	}
+	
+	@GetMapping("/internal/customers/{id}")
+	//@PreAuthorize("#oauth2.hasScope('driver')")
+	public ResponseEntity<Customer> getCustomerById(@PathVariable Long id) throws Exception {
+		return Optional.ofNullable(customerService.getCustomerById(id))
+				.map(c -> new ResponseEntity<Customer>(c, HttpStatus.OK))
+				.orElseThrow(() -> new Exception("Customer with id '" + id + "' does not exist"));
 	}
 	
 //	@PatchMapping("/accounts/drivers/me")

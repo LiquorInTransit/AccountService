@@ -16,6 +16,7 @@ public class Driver {
 
 	private Long id;
 	private Long userId;
+	private String stripeId;
 	@Embedded
 	private Car car;
 	
@@ -61,8 +62,14 @@ public class Driver {
 	public void setProfileImageId(String profileImageId) {
 		this.profileImageId = profileImageId;
 	}
-	
-	
+		
+	@Column(name="stripe_id")
+	public String getStripeId() {
+		return stripeId;
+	}
+	public void setStripeId(String stripeId) {
+		this.stripeId = stripeId;
+	}
 	
 	@Override
 	public String toString() {
@@ -118,6 +125,7 @@ public class Driver {
 		public void setPlate(String plate) {
 			this.plate = plate;
 		}
+		
 
 		@Override
 		public String toString() {

@@ -66,4 +66,8 @@ public class CustomerService {
 			return null;
 		}
 	}
+	
+	public Customer getCustomerById(Long id) {
+		return customerRepo.findById(id).orElse(null);
+	}
 }
