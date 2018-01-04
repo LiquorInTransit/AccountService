@@ -30,7 +30,7 @@ public class CustomerService {
 	public Customer getCurrentCustomer () {
 		Long id = Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName());
 		Customer customer = customerRepo.findByUserId(id);
-		logger.error("These are the are the customer's current coordinates: " + customer.getLocation().getLatitude()+", "+customer.getLocation().getLongitude());
+//		logger.error("These are the are the customer's current coordinates: " + customer.getLocation().getLatitude()+", "+customer.getLocation().getLongitude());
 		return customer;
 	}
 	
