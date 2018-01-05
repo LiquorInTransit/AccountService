@@ -11,9 +11,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.oauth2.client.OAuth2ClientContext;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
+import com.gazorpazorp.client.config.CustomOAuth2FeignRequestInterceptor;
 import com.netflix.appinfo.AmazonInfo;
 
 @SpringBootApplication(scanBasePackages="com.gazorpazorp")
@@ -29,6 +31,12 @@ public class AccountServiceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AccountServiceApplication.class, args);
+	}
+	
+	@Bean
+	feign.RequestInterceptor oauth2FeignRequestInterceptor(OAuth2ClientContext context) {
+		if (context == null) return null;
+		return new CustomOAuth2FeignRequestInterceptor(context);
 	}
 	
 	@Bean

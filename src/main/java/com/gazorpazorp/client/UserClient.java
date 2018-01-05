@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.gazorpazorp.client.config.TokenRequestClientConfiguration;
 import com.gazorpazorp.model.User;
 
-@FeignClient(name = "uaa-service", configuration = TokenRequestClientConfiguration.class)
+@FeignClient(name = "uaa-service"/*, configuration = TokenRequestClientConfiguration.class*/)
 public interface UserClient {
 
 	@PostMapping(value = "/api/users/", consumes = "application/json")
@@ -20,6 +20,6 @@ public interface UserClient {
 //	@DeleteMapping(value = "/api/users/{id}")
 //	public boolean deleteUserById(@PathVariable("id") Long id);
 	
-	@GetMapping(value ="/api/users/{id}")
-	public User getUserById(@PathVariable("id") Long id);
+//	@GetMapping(value ="/api/users/{id}")
+//	public User getUserById(@PathVariable("id") Long id);
 }

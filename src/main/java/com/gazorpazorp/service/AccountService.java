@@ -38,7 +38,7 @@ public class AccountService {
 			if (customerService.createCustomer(new Customer(user.getId()), dto.getEmail())==null) {
 				//handle the error
 			}
-			if (driverService.createDriver(new Driver(user.getId()), req)==null) {
+			if (driverService.createDriver(new Driver(user.getId()), dto.getFirstName(), dto.getLastName(), req)==null) {
 				//handle the error
 			}
 		} catch (Exception e) {

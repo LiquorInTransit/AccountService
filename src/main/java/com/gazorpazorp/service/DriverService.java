@@ -80,8 +80,8 @@ public class DriverService {
 		}
 	}
 	
-	public Driver createDriver(Driver driver, HttpServletRequest req) {
-		String stripeId = createNewStripeAccount(req);
+	public Driver createDriver(Driver driver, String fName, String lName, HttpServletRequest req) {
+		String stripeId = createNewStripeAccount(fName, lName, req);
 		if (stripeId == null)
 			return null;
 		driver.setStripeId(stripeId);
@@ -92,7 +92,7 @@ public class DriverService {
 		driverRepo.deleteByUserId(userId);
 	}
 	
-	private String createNewStripeAccount(HttpServletRequest req) {
+	private String createNewStripeAccount(String fName, String lName, HttpServletRequest req) {
 		RequestOptions reqopt = (new RequestOptions.RequestOptionsBuilder())
 				.setApiKey(secretKey)
 				.build();
@@ -102,8 +102,8 @@ public class DriverService {
 			params.put("type", "custom");
 			params.put("country", "CA");
 			params.put("legal_entity[type]", "individual");
-			params.put("legal_entity[first_name]", "John");
-			params.put("legal_entity[last_name]", "Smith");
+			params.put("legal_entity[first_name]", fName);
+			params.put("legal_entity[last_name]", lName);
 			params.put("legal_entity[address][city]", "Oakville");
 			params.put("legal_entity[dob][day]", 6);
 			params.put("legal_entity[dob][month]", 6);
