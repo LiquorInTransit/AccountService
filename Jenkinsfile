@@ -6,6 +6,7 @@ node {
    		git 'https://github.com/LiquorInTransit/AccountService.git'
    }
    stage('Build') {
+   		sh "mvn clean"
         sh "mvn package"
    }
    stage('Results') {
