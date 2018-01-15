@@ -5,7 +5,7 @@ insert into CUSTOMER (id, user_id, stripe_id, location_address, location_city, l
 insert into CUSTOMER (id, user_id, stripe_id, location_address, location_city, location_postal_code, location_latitude, location_longitude, payment_method) values (5, 5, 'cus_C3kiLg0du676H1', '23 Crestwood Dr.', 'Cambridge', 'N1S3N8', 43.3440436, -80.3302874, 'VISA');
 
 insert into DRIVER (id, user_id, stripe_id, car_make, car_model, car_year, car_colour, car_plate) values (1, 1, 'acct_1BgRGKJHPGq8a2JD', 'Kia', 'Rio', '2015', 'Blue', 'BXEC 717'); 
-insert into DRIVER (id, user_id, stripe_id, car_make, car_model, car_year, car_colour, car_plate, profile_image_id) values (2, 2, 'acct_1BgRH9H5gQH7DkmE', 'Subaru', 'Forester', '2012', 'Grey', '7I77 135', 'TmcAIWm');
+insert into DRIVER (id, user_id, stripe_id, car_make, car_model, car_year, car_colour, car_plate, profile_image_id) values (2, 2, 'acct_1BgRH9H5gQH7DkmE', 'Subaru', 'Forester', '2012', 'Grey', '7I77 135', 't3nS4U3');
 insert into DRIVER (id, user_id, stripe_id, car_make, car_model, car_year, car_colour, car_plate) values (3, 3, 'acct_1BgRHtGt4CvAsGQ2', 'Dodge', 'Grand Caravan', '2001', 'Tan', '7I77 135');
 insert into DRIVER (id, user_id, stripe_id, car_make, car_model, car_year, car_colour, car_plate) values (4, 4, 'acct_1BgRJJFpzQvyTNrz', 'Mini Cooper', 'S', '2017', 'Red', '7I77 135');
 insert into DRIVER (id, user_id, stripe_id, car_make, car_model, car_year, car_colour, car_plate) values (5, 5, 'acct_1BgRKHLiACNw0t3s', 'Tesla', 'Model S', '2016', 'Black', '7I77 135');
